@@ -22,3 +22,22 @@ This project provides an API endpoint to generate unique AI-powered quotes based
 ### Installation
 
 1. **Clone the Repository:**
+
+2. **Install Dependencies:**
+3. **Set Up Environment Variables:**
+   * **Create a `.env` file:** In your project's root directory, create a file named `.env`.
+   * **Add your API key:** Paste your Gemini API key into the `.env` file like this:
+ ``API_KEY=YOUR_ACTUAL_API_KEY``
+
+    **Important:** Never commit your `.env` file to version control!
+
+4. **Deploy to Firebase Functions:** 
+    ```firebase deploy --only functions```
+### Usage
+
+1. **Send a POST Request:**
+   Send a POST request to the deployed Firebase Function endpoint with the following JSON payload:
+Replace `"inspiration"` with the desired quote 
+
+```curl -X POST -H "Content-Type: application/json"         -d '{"category": "inspiration"}'        http://127.0.0.1:5001/[your-project-id]/us-central1/generateAiQuote```
+
