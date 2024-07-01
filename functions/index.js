@@ -6,13 +6,18 @@ exports.generateAiQuote = functions.https.onRequest(async (req, res) => {
   const apiKey = process.env.API_KEY;
 
   const category = req.body.category;
+  const instructions = `You are a person that is looking for quotes that will
+                enrich your life, bring inspiration, give you the honest
+                 truth through a quote, or something
+                 related to a topic you enter.`;
+
   const {
     GoogleGenerativeAI,
   } = require("@google/generative-ai");
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({
     model: "gemini-1.5-flash",
-    systemInstruction: "You are a person that is looking for quotes that will enrich your life, bring inspiration, give you the honest truth through a quote, or something related to a topic you enter.",
+    systemInstruction: instructions,
   });
 
   const generationConfig = {
@@ -42,12 +47,12 @@ exports.generateAiQuote = functions.https.onRequest(async (req, res) => {
   if (responseText.includes(": ")) {
     const quoteParts = responseText.split(": ");
     const quoteText = quoteParts[1].trim();
-    const categoryFromLabel = quoteParts[0].split("about ")[1].replace("\"", "");
+    const categoryLabel = quoteParts[0].split("about ")[1].replace("\"", "");
 
     res.json({
       quote: quoteText,
       author: "Gemini",
-      category: categoryFromLabel,
+      category: categoryLabel,
       occupation: "AI",
     });
   } else {
