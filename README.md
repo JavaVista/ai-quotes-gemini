@@ -39,5 +39,5 @@ This project provides an API endpoint to generate unique AI-powered quotes based
    Send a POST request to the deployed Firebase Function endpoint with the following JSON payload:
 Replace `"inspiration"` with the desired quote 
 
-```curl -X POST -H "Content-Type: application/json" -d '{"category": "inspiration"}' http://127.0.0.1:5001/[your-project-id]/us-central1/generateAiQuote```
+`curl -X POST -H "Content-Type: application/json" -d '{"category": "inspiration"}' http://127.0.0.1:5001/[your-project-id]/us-central1/generateAiQuote`
 
